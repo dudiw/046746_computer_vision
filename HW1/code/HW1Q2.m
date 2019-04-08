@@ -1,3 +1,4 @@
+function [] = HW1Q2()
 % Task 2 - Laplacian pyramid for style transfer
 
 addpath('pyramids');

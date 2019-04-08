@@ -1,6 +1,5 @@
+function [] = HW1Q1()
 % Task 1 - transform
-clear all;
-clc;
 
 N = 101;
 M = ceil(101 / 2);
@@ -24,9 +23,6 @@ for k = 1:2:last
 end    
 
 %% Task 1 - Canny edge detector
-clear all;
-close all;
-clc;
 
 addpath('hough');
 
@@ -39,9 +35,6 @@ I(square_start:square_end, square_start:square_end) = 1;
 houghOverlay('Square: Bitmap',I);
 
 %% Task 1 - Line linking on building.jpg
-clear all;
-close all;
-clc;
 
 addpath('hough');
 

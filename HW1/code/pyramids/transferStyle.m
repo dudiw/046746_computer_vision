@@ -28,7 +28,7 @@ for c = 1:channels
     pyramid_input   = laplacianPyramids(input(:,:,c), nLevel);
     pyramid_example = laplacianPyramids(example(:,:,c), nLevel);
 
-    pyramid_output = pyramid_input;
+    pyramid_output = pyramid_example;
 
     for i = 1 : nLevel-1
         layer_example = pyramid_example{i};

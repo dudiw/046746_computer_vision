@@ -40,3 +40,15 @@ addpath('hough');
 
 I = imread('building.jpg');
 houghOverlay('Building.jpg',I);
+
+%% with more suitable parameters for Canny edge detector
+
+addpath('hough');
+I = im2double(imread('building.jpg'));
+
+% image median, adaptive lower and upper thresholds for edges
+image_median = double(median(I(:)));
+threshold = 0.15 * image_median;
+    
+I = imread('building.jpg');
+houghOverlay('Building.jpg',I, threshold);

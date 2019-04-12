@@ -10,9 +10,9 @@ function [ ] = houghOverlay( fig_title,I,varargin )
 %              I          - The input image.
 %              threshold  - Sensitivity threshold, as a numeric scalar
 %                           or a 2-element vector. 
-%                           Ignores all edges that below than threshold. 
+%                           Ignores all edges below the threshold. 
 %                           Set an empty array ([]) to automatically 
-%                           choose the appropriate values automatically.
+%                           choose the appropriate values.
 %              sigma      - Standard deviation of the Gaussian filter, 
 %                           as a scalar. The default is sqrt(2)
 %
@@ -48,11 +48,15 @@ subplot(1,2,2);
 imshow(edges,[]);
 title([fig_title, ' - Canny Edges']);
 
+pause(0.2); % pause to avoid figure override
+
 figure;
 imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');
 xlabel('\theta'), ylabel('\rho');
 axis on, axis normal;
 title([fig_title, ' - Hough Transform', 'on Canny Edges']);
+
+pause(0.2); % pause to avoid figure override
 
 % Task 1 - Voting
 figure;

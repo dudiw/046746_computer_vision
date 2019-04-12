@@ -24,21 +24,52 @@ nLevel = 6;
 
 % Task 2 (a) - Laplacian Pyramids
 pyramids = laplacianPyramids(I, nLevel);
+figure;
+index = 1;
+
+subplot(3,3,[1,2,3]);
+imshow(I,[])
+title(['Original: Image ' ,image_name]);
+for k = 1:nLevel
+    pyramid = pyramids{k};
+    subplot(3,3,3 + index);
+    imshow(pyramid,[])
+    title(['Pyramid l=',num2str(index)]);
+    index = index + 1;
+end  
+
+% Save results
+output_name = strcat('img_', image_name, '_laplacian_pyramids');
+output_path = fullfile('output', output_name);
+print(output_path,'-dpng')
 
 % Task 2 (b) - Pyramid Reconstruction
 image = reconstructImage(pyramids);
 figure;
 subplot(1,2,1);
+imshow(I,[]);
+title(['Orginal: Image ' ,image_name]);
+subplot(1,2,2);
 imshow(image,[]);
 title(['Reconstructed: Image ' ,image_name]);
+
+% Save results
+output_name = strcat('img_', image_name, '_pyramid_reconstruction');
+output_path = fullfile('output', output_name);
+print(output_path,'-dpng')
 
 example_name = '6';
 path_E_bg = fullfile(path_background, strcat(example_name,'.jpg'));
 
 % Task 2 (c) - Background
+I = im2double(imread(path_I));
+figure;
+subplot(1,2,1);
+imshow(I,[]);
+title(['Orginal: Image ' ,image_name]);
 mask = im2double(imread(path_I_mask));
 background = im2double(imread(path_E_bg));
-image = maskBackground(image, mask, background);
+image = maskBackground(I, mask, background);
 subplot(1,2,2);
 imshow(image,[]);
 title(['Background transfer: Image ' ,image_name]);

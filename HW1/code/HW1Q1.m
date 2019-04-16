@@ -15,9 +15,11 @@ for k = 1:2:last
     x = values(k);
     y = values(k + 1);
     f(x,y)=1;
-    H=hough(f);
+    [H,T,R] = hough(f);
     subplot(1,5,index);
-    imshow(H,[])
+    imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');
+    xlabel('\theta'), ylabel('\rho');
+    axis on, axis normal;
     title(num2str(index));
     index = index + 1;
 end    

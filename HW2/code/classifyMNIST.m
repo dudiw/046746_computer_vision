@@ -1,4 +1,4 @@
-function [] = classifyMNIST(trainSet, testSet, nKernel, learningRate)
+function [ accuracy ] = classifyMNIST(trainSet, testSet, nKernel, learningRate)
  % trainSet:     The training set.
  % testSet:      The validation set.
  % nKernel:      The number of kernels of the first layer.

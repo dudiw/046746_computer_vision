@@ -1,4 +1,4 @@
-function [] = regressMNIST(trainSet, testSet, nKernel, learningRate)
+function [ accuracy ] = regressMNIST(trainSet, testSet, nKernel, learningRate)
  % trainSet:     The training set.
  % testSet:      The validation set.
  % nKernel:      The number of kernels of the first layer.
@@ -7,8 +7,8 @@ function [] = regressMNIST(trainSet, testSet, nKernel, learningRate)
 XTrain = trainSet{1};
 YTrain = trainSet{2};
 
-XValidation = testSet{1};
-YValidation = testSet{2};
+XTest = testSet{1};
+YTest = testSet{2};
 
 nk1 = nKernel;
 nk2 = nKernel * 2;
@@ -46,8 +46,11 @@ options = trainingOptions('sgdm', ...
 
 net = trainNetwork(XTrain,YTrain,layers,options);
 
-YPred = predict(net,XTest);
+prediction = predict(net,XTest);
+[~,YPred] = max(prediction, [],2);
+accuracy = sum(YPred == double(YTest))/numel(YTest);
 
-rmse = sqrt(mean((YTest - YPred).^2));
+fprintf('Regression Accuracy = %f\n', accuracy);
+
 
 end

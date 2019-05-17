@@ -1,5 +1,5 @@
 classdef sseClassificationLayer < nnet.layer.ClassificationLayer
-    % Example custom classification layer with sum of squares error loss.
+    % Custom classification layer with sum of squares error loss.
     
     methods
         function layer = sseClassificationLayer(name)

@@ -12,7 +12,7 @@ numTrainFiles = 750;
 nKernel = 8;
 learningRate = 0.01;
 
-trainMNIST(trainSet, testSet, nKernel, learningRate, classificationLayer);
+accuracy = classifyMNIST(trainSet, testSet, nKernel, learningRate);
 
 %% Task A section 7.1 - Learning rate 0.1
 
@@ -25,7 +25,7 @@ numTrainFiles = 750;
 nKernel = 8;
 learningRate = 0.1;
 
-trainMNIST(trainSet, testSet, nKernel, learningRate, classificationLayer);
+classifyMNIST(trainSet, testSet, nKernel, learningRate);
 
 %% Task A section 7.2 - Learning rate 0.0001
 
@@ -38,7 +38,7 @@ numTrainFiles = 750;
 nKernel = 8;
 learningRate = 0.0001;
 
-trainMNIST(trainSet, testSet, nKernel, learningRate, classificationLayer);
+classifyMNIST(trainSet, testSet, nKernel, learningRate);
 
 %% Task A section 7.3 - Regression layer
 
@@ -55,8 +55,11 @@ regressMNIST({XTrain,YTrain}, {XValidation,YValidation}, nKernel, learningRate);
 nKernel = 2;
 learningRate = 0.01;
 
-[XTrain,YTrain,~]           = digitTrain4DArrayData;
-[XValidation,YValidation,~] = digitTest4DArrayData;
+digitDatasetPath = fullfile(matlabroot,'toolbox','nnet','nndemos', 'nndatasets','DigitDataset');
+dataStore = imageDatastore(digitDatasetPath, 'IncludeSubfolders',true,'LabelSource','foldernames');
 
-regressMNIST({XTrain,YTrain}, {XValidation,YValidation}, nKernel, learningRate);
+numTrainFiles = 750;
+[trainSet,testSet] = splitEachLabel(dataStore,numTrainFiles,'randomize');
+
+classifyMNIST(trainSet,testSet, nKernel, learningRate);
 

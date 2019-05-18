@@ -5,7 +5,7 @@ function [result] = classifyVGG16(net, image)
 % Adjust size of the image
 sz = net.Layers(1).InputSize;
 
-I = image('data'); 
+I = image('data');   
 image_resized = imresize(I, [sz(1) sz(2)]);
 
 % Classify the image using VGG-16 

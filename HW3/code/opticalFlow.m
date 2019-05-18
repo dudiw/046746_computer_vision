@@ -8,21 +8,23 @@ im1 = im2double(I1);
 im2 = im2double(I2);
  
 % for each point, calculate Iₓ, Iᵧ, I_t
-% Ix = conv2(im1,[-1 1; -1 1], 'valid'); % partial on x
-% Iy_m = conv2(im1, [-1 -1; 1 1], 'valid'); % partial on y
-% It_m = conv2(im1, ones(2), 'valid') + conv2(im2, -ones(2), 'valid'); % partial on t
+Ix_m = conv2(im1,[-1 1; -1 1], 'valid'); % partial on x
+Iy_m = conv2(im1, [-1 -1; 1 1], 'valid'); % partial on y
+It_m = conv2(im1, ones(2), 'valid') + conv2(im2, -ones(2), 'valid'); % partial on t
 
-[Ix_m, Iy_m] = gradient(im1);
-It_m = im2 - im1;
+% [Ix_m, Iy_m] = gradient(im1);
+% It_m = im2 - im1;
 u = zeros(size(im1));
 v = zeros(size(im2));
 
+w = round(N/2);
+
 % Estimate flow within region of N x N
-for i = N+1:size(Ix_m,1)-N
-   for j = N+1:size(Ix_m,2)-N
-      Ix = Ix_m(i-N:i+N, j-N:j+N);
-      Iy = Iy_m(i-N:i+N, j-N:j+N);
-      It = It_m(i-N:i+N, j-N:j+N);
+for i = w+1:size(Ix_m,1)-w
+   for j = w+1:size(Ix_m,2)-w
+      Ix = Ix_m(i-w:i+w, j-w:j+w);
+      Iy = Iy_m(i-w:i+w, j-w:j+w);
+      It = It_m(i-w:i+w, j-w:j+w);
 
       Ix = Ix(:);
       Iy = Iy(:);

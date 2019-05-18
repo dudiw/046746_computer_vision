@@ -84,12 +84,12 @@ image_color_modified('data') = I_color_modified;
 image_color_modified('name') = 'Samoyed: Color transformation';
 images{3} = image_color_modified;
 
-% Filtering - apply unsharp masking to enhance the perceived sharpness
+% Filtering - sharpen the image using unsharp masking
 % by subtracting the gaussian-blurred image from itself
 I_sharpen = imsharpen(I);
 image_filtered = containers.Map();
 image_filtered('data') = I_sharpen;
-image_filtered('name') = 'Samoyed: Filtered unsharp musking';
+image_filtered('name') = 'Samoyed: Filtered - Sharpening';
 images{4} = image_filtered;
 
 % Display resulting images
@@ -108,7 +108,7 @@ xlabel('Histogram Equalization');
 subplot(1,4,4);
 imshow(I_sharpen);
 title({'Image:','Filtered'});
-xlabel('Unsharp masking');
+xlabel('Sharpening');
 
 [count,~] = size(images);
 
@@ -122,7 +122,7 @@ for k = 1:count
     image = images{k};
     result = classifyVGG16(net, image);
     
-    subplot(count, 1, k);
+    subplot(2,2, k);
     imshow(imtile({result('original'), result('resized')}));
     title(result('name'),'Interpreter','none');
     xlabel(result('prediction'));
@@ -146,6 +146,7 @@ imshow(imtile(filters,'ThumbnailSize',[64 64]));
 title({'VGG16: Layer features','conv1_1'},'Interpreter','none');
 
 % Show the filter response of 'conv1_1' to the images
+activation = cell(k,1);
 figure;
 for k = 1:count
     result = results{k};
@@ -157,12 +158,20 @@ for k = 1:count
     xlabel(result('prediction'));
     
     act1 = result('response');
+    activation{k} = act1;
     response = imtile(mat2gray(act1),'GridSize',[1 2]);
     subplot(count, 2, index + 1);
     imshow(response);
     title({'VGG16 Conv Layer', 'Filter response'});
     xlabel('Response of 2 filters in conv1_1','Interpreter','none');
 end
+
+diff = activation{1} - activation{count};
+response = imtile(mat2gray(diff),'GridSize',[1 2]);
+figure;
+imshow(response);
+title(['VGG16 Conv Layer Response: ', 'Original vs Sharpened']);
+xlabel('Response of 2 filters in conv1_1','Interpreter','none');
 
 %% Task B section 6 - Feature vector of Fully connected layer
 

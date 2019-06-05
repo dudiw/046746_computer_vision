@@ -1,5 +1,7 @@
-%% 046746 Computer Vision - HW2
-% Task B. Using a Pre-trained network
+function [] = taskB()
+
+%% 046746 Computer Vision - HW3
+% Task B. Camera Calibration
 
 clc; close all; clear all;
 

@@ -34,10 +34,7 @@ fprintf('error %f \n', err);
 %      Why didn’t we use the qr function? 
 % C.2) Explain the operation done at each of the function lines.
 KR    = P(:,1:3);
-[R,~] = rq(KR);
-
-% K = KR * R⁻¹ = KR * Rᵀ
-K = KR * R';
+[K,R] = rq(KR);
 
 % Section d 
 % *** !!! *** ====================

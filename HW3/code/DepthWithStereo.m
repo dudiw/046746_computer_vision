@@ -1,9 +1,9 @@
 close all;
 %%
 
-
-dir = 'Depth with stereo data\input\';
-dir_gt = 'Depth with stereo data\groundtruth\';
+url_data = 'Depth with stereo data';
+dir = fullfile(url_data,'input');
+dir_gt = fullfile(url_data,'groundtruth');
 num_tests = ['03'; '04'; '07'];
 
 W = [5,11,21]; % window sizes
@@ -12,7 +12,7 @@ DisparityMax = 60;
 for i=1:3 % % for each image
     
     % left and right images:
-    file = [dir 'test' num_tests(i,:) '_'];
+    file = fullfile(dir,['test' num_tests(i,:) '_']);
     left_im = imread([file 'l.png']);
     right_im = imread([file 'r.png']);
     figure()
@@ -24,7 +24,7 @@ for i=1:3 % % for each image
     title("right image");
     
     % show ground truth:
-    file_gt = [dir_gt 'test' num_tests(i,:) '.mat'];
+    file_gt = fullfile(dir_gt,['test' num_tests(i,:) '.mat']);
     load(file_gt);
     subplot(2,3,3);
     imagesc(groundtruth);

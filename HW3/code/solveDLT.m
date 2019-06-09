@@ -1,10 +1,6 @@
 function A = solveDLT(x,y)
-% A = solveDLT(x,y) solves for the projective transformation matrix A with respect to
-% the linear system y ~ Ax where ~ denotes equality up to a scale, using the
-% Direct Linear Transformation technique. A is a m-by-n matrix, x is a n-by-k
-% matrix that contains k source points in column vector form and y is a m-by-k
-% matrix containning k target points in column vector form. The solution is
-% normalised as any multiple of A also satisfies the equation.
+% x - 3d points
+% y - 2d points
 
 [n,k] = size(x);
 [m,~] = size(y);
@@ -23,9 +19,9 @@ end
 % flatten A
 A = reshape(A,m*n,[]);
 % solve using SVD
-[~,~,V] = svd(A*A');
+[~,~,V] = svd(A');
 
-% the singular vector of the smallest singular value minimizes |A'A|
+% the eigenvector of the smallest eigenvalue minimizes A
 v_min = V(:,end);
 A = reshape(v_min,m,n);
 % normalize A

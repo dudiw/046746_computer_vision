@@ -29,6 +29,8 @@ for i=1:rows_num % row
     % parallell line in the right image for rectified images
     scan_line = I_right(i:i+(w-1),:,:);
     
+    fprintf('disparityMap pre-W %d / %d \n', i,rows_num);
+    
     % run throughout all the x_lefts:
     for j=1:cols_num % column
         
@@ -38,7 +40,7 @@ for i=1:rows_num % row
         % the relevant x_rights for checking on the right image
         idxs = j-DisparityMax:j+(w-1);
         idxs(idxs<1) = [];
-       
+        
         % calculate the ssds for the line
         ssd = windowMatching(scan_line(:,idxs,:), window);
         

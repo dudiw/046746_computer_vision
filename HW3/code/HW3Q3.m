@@ -1,5 +1,6 @@
-close all;
-%%
+function [] = HW3Q3()
+
+% HW3.Q3: Depth with Stereo 
 
 url_data = 'Depth with stereo data';
 dir = fullfile(url_data,'input');
@@ -45,4 +46,5 @@ for i=1:3 % % for each image
         
     end
     
+end
 end

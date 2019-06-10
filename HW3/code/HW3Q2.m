@@ -28,6 +28,9 @@ xh = x(1:2,:) ./ x(3,:);
 error = mean(sqrt(sum((xh - xh_projected) .^ 2)));
 fprintf('error %f \n', error);
 
+figure(1);
+plot(xh_projected(1,:),xh_projected(2,:),'*');  
+
 % Section C
 % Reconstruct R and K using RQ decomposition
 KR    = P(:,1:3);

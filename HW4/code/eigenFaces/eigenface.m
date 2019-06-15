@@ -6,7 +6,7 @@ readYaleFaces;
 % train_face_id - an array with the id of the faces of the training set.
 % image1--image20 are the test set.
 % is_face - is an array with 1 for test images that contain a face
-% faec_id - is an array with the id of the face in the test set, 
+% face_id - is an array with the id of the face in the test set, 
 %           0 if no face and -1 if a face not from the train-set.
 
 

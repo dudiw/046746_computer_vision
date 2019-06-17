@@ -22,11 +22,9 @@ for i = 1:n
     Wpca(:, i) = Wpca(:, i) / norm(Wpca(:, i));
 end
 
-
 [~, i] = sort(diag(D) , 'descend'); % sort eigenvalues and eigenvectors
 Wpca = Wpca(: , i);
 Wpca = Wpca(: ,1:(N - c));          % keep (N - c) components
-
 
 X = X - repmat(mu, rows(X), 1) * W; % project
 
@@ -48,7 +46,7 @@ end
 [Wlda, D] = eig(Sb, Sw );           % solve general eigenvalue problem
 [~ , i] = sort(diag(D), 'descend'); % sort eigenvectors
 Wlda = Wlda(:, i);
-Wlda = Wlda(: ,1: k);               % keep (c - 1) eigenvectors
+Wlda = Wlda(: ,1:k);               % keep (c - 1) eigenvectors
 
 basis = Wpca * Wlda;                % Fisher basis
 end

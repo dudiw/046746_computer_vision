@@ -17,7 +17,8 @@ C = 15;
 % Train set: Reconstruction
 Y = basis' * (A - meanvec);        % project to fisher space
 X = basis  *  Y + meanvec;         % reconstruct
-X = normalize(X, 'range', [0 255]);
+X(X > 255) = 255;
+X(X < 0)   = 0;
 
 % Representation metrics
 Norm = @(M)   M / diag(max(M) - min(M));
@@ -45,7 +46,8 @@ end
 % Test set: Reconstruction
 Yt = basis' * (B - meanvec);        % project to fisher space
 X  = basis  *  Yt + meanvec;        % reconstruct
-X  = normalize(X, 'range', [0 255]);
+X(X > 255) = 255;
+X(X < 0)   = 0;
 
 Test.RMSE = RMSE(B,X) ./ 255 * 100; % Test RMSE
 Test.DRE  = DRE(B,X) * 100;         % Test DRE
